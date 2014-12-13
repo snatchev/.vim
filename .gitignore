@@ -1,0 +1,8 @@
+.netrwhist
+.DS_Store
+_temp/*
+_backup/*
+bundle/*
+
+!_temp/.gitkeep
+!_backup/.gitkeep

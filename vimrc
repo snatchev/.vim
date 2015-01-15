@@ -45,6 +45,7 @@ if has("autocmd")
 endif
 
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
+noremap <leader>t :NERDTreeToggle<CR><c-w><c-p>:NERDTreeFind<CR>
 set wildmenu
 set autoread
 

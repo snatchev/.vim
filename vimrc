@@ -37,14 +37,20 @@ colorscheme Tomorrow-Night-Eighties
 if has("autocmd")
   " In Makefiles, use real tabs, not tabs expanded to spaces
   au FileType make set noexpandtab
+
+  " treat json as javascript ?
   au BufNewFile,BufRead *.json set ft=javascript
+
   " Remember last location in file, but not for commit messages.
   " see :help last-position-jump
   au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g`\"" | endif
 endif
 
+" map leader n to toggle nerd tree
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+" map leader t to find the current file in nerdtree
 noremap <leader>t :NERDTreeToggle<CR><c-w><c-p>:NERDTreeFind<CR>
 set wildmenu
 set autoread

@@ -45,6 +45,9 @@ if has("autocmd")
   " see :help last-position-jump
   au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g`\"" | endif
+
+  " close NERDTree if it's the last window open
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 endif
 
 " map leader n to toggle nerd tree
@@ -63,6 +66,4 @@ let g:airline_powerline_fonts=1
    autocmd BufEnter * NERDTreeMirror
  end
 
-" close NERDTree if it's the last window open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 

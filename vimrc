@@ -46,6 +46,9 @@ if has("autocmd")
   au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g`\"" | endif
 
+  " remove trailing whitespace on save
+  autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js,*.clj} :call <SID>CleanFile()
+
   " close NERDTree if it's the last window open
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 endif
@@ -66,4 +69,17 @@ let g:airline_powerline_fonts=1
    autocmd BufEnter * NERDTreeMirror
  end
 
+function! <SID>CleanFile()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let [l,c] = [line("."),col(".")]
 
+    " Do the business:
+    " %!git strip space
+    silent! %s/\s\+$//e
+    silent! %s#\($\n\s*\)\+\%$##
+
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction

@@ -47,7 +47,7 @@ if has("autocmd")
     \| exe "normal! g`\"" | endif
 
   " remove trailing whitespace on save
-  autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js,*.clj} :call <SID>CleanFile()
+  autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js,*.clj,*.php} :call <SID>CleanFile()
 
   " close NERDTree if it's the last window open
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif

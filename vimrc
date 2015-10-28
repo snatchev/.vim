@@ -1,7 +1,7 @@
 filetype off " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle
@@ -65,7 +65,7 @@ if has("autocmd")
 endif
 
 " map leader n to toggle nerd tree
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 
 " map leader t to find the current file in nerdtree
 noremap <leader>t :NERDTreeToggle<CR><c-w><c-p>:NERDTreeFind<CR>
@@ -75,10 +75,10 @@ set autoread
 let g:airline_powerline_fonts=1
 
 " share a single NERDTree between buffers and tabs
- if argc() == 0
-   autocmd VimEnter * NERDTree
-   autocmd BufEnter * NERDTreeMirror
- end
+if argc() == 0
+  autocmd VimEnter * NERDTree
+  autocmd BufEnter * NERDTreeMirror
+end
 
 function! <SID>CleanFile()
     " Preparation: save last search, and cursor position.

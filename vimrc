@@ -44,6 +44,9 @@ nnoremap K :Ag "\b<C-R><C-W>\b"<CR>
 " ctrl-s should save
 nnoremap <silent> <C-S> :w<CR>
 inoremap <C-S> <C-O>:w<CR>
+" ctrl-w brackets for tab movement
+nnoremap <C-W>] :tabnext<CR>
+nnoremap <C-W>[ :tabprevious<CR>
 
 if has("autocmd")
   " In Makefiles, use real tabs, not tabs expanded to spaces
@@ -61,7 +64,8 @@ if has("autocmd")
   autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js,*.clj,*.php} :call <SID>CleanFile()
 
   " close NERDTree if it's the last window open
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  autocmd BufWinEnter * NERDTreeMirror
 endif
 
 " map leader n to toggle nerd tree
@@ -77,7 +81,6 @@ let g:airline_powerline_fonts=1
 " share a single NERDTree between buffers and tabs
 if argc() == 0
   autocmd VimEnter * NERDTree
-  autocmd BufEnter * NERDTreeMirror
 end
 
 function! <SID>CleanFile()

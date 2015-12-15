@@ -25,6 +25,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-rails'
 Plugin 'skwp/vim-rspec'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'dag/vim-fish'
 
 call vundle#end()            " required
 filetype plugin indent on    " requiredfiletype plugin indent on
@@ -37,6 +38,11 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   let g:ctrlp_use_caching = 0 " no need to cache ag
 end
+
+" don't use fish for shell stuff
+if &shell =~# 'fish$'
+    set shell=sh
+endif
 
 " search for words under the cursor
 nnoremap K :Ag "\b<C-R><C-W>\b"<CR>

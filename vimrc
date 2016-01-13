@@ -47,6 +47,11 @@ endif
 " search for words under the cursor
 nnoremap K :Ag "\b<C-R><C-W>\b"<CR>
 
+vnoremap <C-c> "+y
+" ctrl-s should save
+nnoremap <silent> <C-S> :w<CR>
+inoremap <C-S> <C-O>:w<CR>
+vnoremap <C-c> "+y
 " ctrl-s should save
 nnoremap <silent> <C-S> :w<CR>
 inoremap <C-S> <C-O>:w<CR>

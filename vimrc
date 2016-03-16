@@ -26,11 +26,20 @@ Plugin 'tpope/vim-rails'
 Plugin 'skwp/vim-rspec'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'dag/vim-fish'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'lambdatoast/elm.vim'
+Plugin 'elixir-lang/vim-elixir'
 
 call vundle#end()            " required
 filetype plugin indent on    " requiredfiletype plugin indent on
 
 colorscheme Tomorrow-Night-Eighties
+
+" enable deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 100
+
+let g:airline_powerline_fonts=1
 
 " Speed up things with `ag` instead of grep
 if executable('ag')
@@ -59,25 +68,19 @@ inoremap <C-S> <C-O>:w<CR>
 nnoremap <C-W>] :tabnext<CR>
 nnoremap <C-W>[ :tabprevious<CR>
 
-if has("autocmd")
-  " In Makefiles, use real tabs, not tabs expanded to spaces
-  au FileType make set noexpandtab
+" In Makefiles, use real tabs, not tabs expanded to spaces
+au FileType make set noexpandtab
 
-  " treat json as javascript ?
-  au BufNewFile,BufRead *.json set ft=javascript
+" treat json as javascript ?
+au BufNewFile,BufRead *.json set ft=javascript
 
-  " Remember last location in file, but not for commit messages.
-  " see :help last-position-jump
-  au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g`\"" | endif
+" Remember last location in file, but not for commit messages.
+" see :help last-position-jump
+au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
+  \| exe "normal! g`\"" | endif
 
-  " remove trailing whitespace on save
-  autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js,*.clj,*.php} :call <SID>CleanFile()
-
-  " close NERDTree if it's the last window open
-  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-  autocmd BufWinEnter * NERDTreeMirror
-endif
+" remove trailing whitespace on save
+autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js,*.clj,*.php} :call <SID>CleanFile()
 
 " map leader n to toggle nerd tree
 map <leader>n :NERDTreeToggle<CR>
@@ -86,8 +89,6 @@ map <leader>n :NERDTreeToggle<CR>
 noremap <leader>t :NERDTreeToggle<CR><c-w><c-p>:NERDTreeFind<CR>
 set wildmenu
 set autoread
-
-let g:airline_powerline_fonts=1
 
 " share a single NERDTree between buffers and tabs
 if argc() == 0

@@ -1,44 +1,45 @@
+" Vundle Setup
 filetype off " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/vim/bundle/Vundle.vim
 call vundle#begin()
-
-" let Vundle manage Vundle
-" required!
 Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'rking/ag.vim'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'bling/vim-airline'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Plugin 'dag/vim-fish'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'elixir-lang/vim-elixir'
 Plugin 'kien/ctrlp.vim'
+Plugin 'lambdatoast/elm.vim'
+Plugin 'neomake/neomake'
+Plugin 'pangloss/vim-javascript'
+Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-Plugin 'bling/vim-airline'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-cucumber'
+Plugin 'skwp/vim-rspec'
+Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-haml'
-Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-rails'
-Plugin 'skwp/vim-rspec'
+Plugin 'tpope/vim-surround'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'dag/vim-fish'
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'lambdatoast/elm.vim'
-Plugin 'elixir-lang/vim-elixir'
-
 call vundle#end()            " required
 filetype plugin indent on    " requiredfiletype plugin indent on
+
+
+set wildmenu
+set autoread
 
 colorscheme Tomorrow-Night-Eighties
 
 " enable deoplete
 let g:deoplete#enable_at_startup = 1
+"let g:deoplete#auto_complete_start_length = 4
 let g:deoplete#auto_complete_delay = 100
-
 let g:airline_powerline_fonts=1
 
 " Speed up things with `ag` instead of grep
@@ -53,47 +54,37 @@ if &shell =~# 'fish$'
     set shell=sh
 endif
 
-" search for words under the cursor
-nnoremap K :Ag "\b<C-R><C-W>\b"<CR>
-
-vnoremap <C-c> "+y
-" ctrl-s should save
-nnoremap <silent> <C-S> :w<CR>
-inoremap <C-S> <C-O>:w<CR>
-vnoremap <C-c> "+y
-" ctrl-s should save
-nnoremap <silent> <C-S> :w<CR>
-inoremap <C-S> <C-O>:w<CR>
-" ctrl-w brackets for tab movement
-nnoremap <C-W>] :tabnext<CR>
-nnoremap <C-W>[ :tabprevious<CR>
+" ========== auto commands ===========
 
 " In Makefiles, use real tabs, not tabs expanded to spaces
-au FileType make set noexpandtab
+autocmd FileType make set noexpandtab
 
 " treat json as javascript ?
-au BufNewFile,BufRead *.json set ft=javascript
+autocmd BufNewFile,BufRead *.json set ft=javascript
 
 " Remember last location in file, but not for commit messages.
 " see :help last-position-jump
-au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
+autocmd BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
   \| exe "normal! g`\"" | endif
 
 " remove trailing whitespace on save
 autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js,*.clj,*.php} :call <SID>CleanFile()
+
+" run a linter on save
+autocmd! BufWritePost * Neomake
+let g:neomake_warning_sign = {'text': '⚠️', 'texthl': 'LineNr'}
+let g:neomake_error_sign = {'text': '❌', 'texthl': 'LineNr'}
+
+" share a single NERDTree between buffers and tabs
+if argc() == 0
+  autocmd VimEnter * NERDTree
+end
 
 " map leader n to toggle nerd tree
 map <leader>n :NERDTreeToggle<CR>
 
 " map leader t to find the current file in nerdtree
 noremap <leader>t :NERDTreeToggle<CR><c-w><c-p>:NERDTreeFind<CR>
-set wildmenu
-set autoread
-
-" share a single NERDTree between buffers and tabs
-if argc() == 0
-  autocmd VimEnter * NERDTree
-end
 
 function! <SID>CleanFile()
     " Preparation: save last search, and cursor position.

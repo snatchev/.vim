@@ -2,7 +2,7 @@
 filetype off " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/vim/bundle/Vundle.vim
+set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
@@ -13,6 +13,7 @@ Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plugin 'dag/vim-fish'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'fatih/vim-go'
 Plugin 'kien/ctrlp.vim'
 Plugin 'lambdatoast/elm.vim'
 Plugin 'neomake/neomake'
@@ -28,6 +29,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-ruby/vim-ruby'
+
 call vundle#end()            " required
 filetype plugin indent on    " requiredfiletype plugin indent on
 
@@ -41,7 +43,7 @@ highlight Comment cterm=italic
 
 " enable deoplete
 let g:deoplete#enable_at_startup = 1
-"let g:deoplete#auto_complete_start_length = 4
+let g:deoplete#auto_complete_start_length = 5
 let g:deoplete#auto_complete_delay = 100
 let g:airline_powerline_fonts=1
 

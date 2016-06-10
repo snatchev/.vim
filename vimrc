@@ -5,6 +5,7 @@ filetype off " required
 set rtp+=~/vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'bling/vim-airline'
 Plugin 'cakebaker/scss-syntax.vim'
@@ -30,11 +31,13 @@ Plugin 'vim-ruby/vim-ruby'
 call vundle#end()            " required
 filetype plugin indent on    " requiredfiletype plugin indent on
 
-
 set wildmenu
 set autoread
+set title
 
+" colorscheme and highlighting
 colorscheme Tomorrow-Night-Eighties
+highlight Comment cterm=italic
 
 " enable deoplete
 let g:deoplete#enable_at_startup = 1
@@ -72,8 +75,13 @@ autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js
 
 " run a linter on save
 autocmd! BufWritePost * Neomake
-let g:neomake_warning_sign = {'text': '⚠️', 'texthl': 'LineNr'}
-let g:neomake_error_sign = {'text': '❌', 'texthl': 'LineNr'}
+"let g:neomake_warning_sign = {'text': '⚠️', 'texthl': 'LineNr'}
+"let g:neomake_error_sign = {'text': '❌', 'texthl': 'LineNr'}
+let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'WarningMsg'}
+let g:neomake_error_sign = {'text': '✖︎', 'texthl': 'ErrorMsg'}
+let g:neomake_javascript_enabled_makers = ['flow']
+let g:neomake_ruby_enabled_makers = ['mri']
+
 
 " share a single NERDTree between buffers and tabs
 if argc() == 0

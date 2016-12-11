@@ -4,10 +4,7 @@ if has("gui_macvim")
 endif
 
 " Map ⌘ + direction to change buffers
-map <D-Down> <C-W><Down>
-map <D-Up> <C-W><Up>
-map <D-Left> <C-W><Left>
-map <D-Right> <C-W><Right>
-
-" Map ⌘ +t to open a new tab
-map <D-t> :tabnew<CR>
+map <S-Down> <C-W><Down>
+map <S-Up> <C-W><Up>
+map <S-Left> <C-W><Left>
+map <S-Right> <C-W><Right>

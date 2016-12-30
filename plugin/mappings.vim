@@ -71,10 +71,10 @@ cmap <C-P> <C-R>=expand("%:p:h") . "/"
 " iTerm 2 default key-mappings -> terminal codes
 
 " move around in buffers
-nnoremap <D-Up> :wincmd k<CR>
-nnoremap <D-Down> :wincmd j<CR>
-nnoremap <D-Right> :wincmd l<CR>
-nnoremap <D-Left> :wincmd h<CR>
+nnoremap <S-Up> :wincmd k<CR>
+nnoremap <S-Down> :wincmd j<CR>
+nnoremap <S-Right> :wincmd l<CR>
+nnoremap <S-Left> :wincmd h<CR>
 
 " search for words under the cursor
 nnoremap K :Ag "\b<C-R><C-W>\b"<CR>

@@ -14,8 +14,11 @@ Plugin 'dag/vim-fish'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'fatih/vim-go'
-Plugin 'kien/ctrlp.vim'
+Plugin 'flowtype/vim-flow'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'lambdatoast/elm.vim'
+Plugin 'mxw/vim-jsx'
 Plugin 'neomake/neomake'
 Plugin 'pangloss/vim-javascript'
 Plugin 'rking/ag.vim'
@@ -41,11 +44,13 @@ set title
 colorscheme Tomorrow-Night-Eighties
 highlight Comment cterm=italic
 
-" enable deoplete
+"
+" let g:deoplet#disable_auto_complete = 0
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 5
 let g:deoplete#auto_complete_delay = 100
 let g:airline_powerline_fonts=1
+let g:javascript_enable_domhtmlcss = 1
 
 " Speed up things with `ag` instead of grep
 if executable('ag')
@@ -53,6 +58,8 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   let g:ctrlp_use_caching = 0 " no need to cache ag
 end
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_by_filename = 1
 
 " don't use fish for shell stuff
 if &shell =~# 'fish$'
@@ -77,13 +84,15 @@ autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js
 
 " run a linter on save
 autocmd! BufWritePost * Neomake
-"let g:neomake_warning_sign = {'text': '⚠️', 'texthl': 'LineNr'}
-"let g:neomake_error_sign = {'text': '❌', 'texthl': 'LineNr'}
-let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'WarningMsg'}
-let g:neomake_error_sign = {'text': '✖︎', 'texthl': 'ErrorMsg'}
-let g:neomake_javascript_enabled_makers = ['flow']
-let g:neomake_ruby_enabled_makers = ['mri']
+let g:neomake_warning_sign = {'text': 'ℹ︎', 'texthl': 'WarningMsg'}
+let g:neomake_error_sign = {'text': '✖︎', 'texthl': 'WarngingMsg'}
 
+let g:neomake_javascript_enabled_makers = ['flow', 'eslint']
+let g:neomake_jsx_enabled_makers = ['flow', 'eslint']
+
+let g:neomake_ruby_enabled_makers = ['mri']
+" disable flow's error reporting.
+let g:flow#enable = 0
 
 " share a single NERDTree between buffers and tabs
 if argc() == 0

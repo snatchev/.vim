@@ -13,6 +13,7 @@ Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plugin 'dag/vim-fish'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'elzr/vim-json'
 Plugin 'fatih/vim-go'
 Plugin 'flowtype/vim-flow'
 Plugin 'kchmck/vim-coffee-script'
@@ -79,9 +80,6 @@ autocmd BufNewFile,BufRead *.json set ft=javascript
 autocmd BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
   \| exe "normal! g`\"" | endif
 
-" remove trailing whitespace on save
-autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js,*.clj,*.php} :call <SID>CleanFile()
-
 " run a linter on save
 autocmd! BufWritePost * Neomake
 let g:neomake_warning_sign = {'text': 'ℹ︎', 'texthl': 'WarningMsg'}
@@ -89,21 +87,17 @@ let g:neomake_error_sign = {'text': '✖︎', 'texthl': 'WarngingMsg'}
 
 let g:neomake_javascript_enabled_makers = ['flow', 'eslint']
 let g:neomake_jsx_enabled_makers = ['flow', 'eslint']
-
 let g:neomake_ruby_enabled_makers = ['mri']
 " disable flow's error reporting.
 let g:flow#enable = 0
 
-" share a single NERDTree between buffers and tabs
-if argc() == 0
-  autocmd VimEnter * NERDTree
-end
-
 " map leader n to toggle nerd tree
 map <leader>n :NERDTreeToggle<CR>
-
 " map leader t to find the current file in nerdtree
 noremap <leader>t :NERDTreeToggle<CR><c-w><c-p>:NERDTreeFind<CR>
+
+" remove trailing whitespace on save
+autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js,*.clj,*.php} :call <SID>CleanFile()
 
 function! <SID>CleanFile()
     " Preparation: save last search, and cursor position.

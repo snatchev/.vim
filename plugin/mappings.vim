@@ -93,11 +93,6 @@ nnoremap <A-]> :tabnext<CR>
 nnoremap <A-[> :tabprevious<CR>
 nnoremap <A-t> :tabnew<CR>
 
-nmap <S-Up> <C-W><Up>
-nmap <S-Down> <C-W><Down>
-nmap <S-Left> <C-W><Left>
-nmap <S-Right> <C-W><Right>
-
 " Indent / Outdent while maintaining selection
 vmap <A-]> >gv
 vmap <A-[> <gv

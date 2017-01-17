@@ -15,7 +15,6 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'elzr/vim-json'
 Plugin 'fatih/vim-go'
-Plugin 'flowtype/vim-flow'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'lambdatoast/elm.vim'
@@ -80,16 +79,16 @@ autocmd BufNewFile,BufRead *.json set ft=javascript
 autocmd BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
   \| exe "normal! g`\"" | endif
 
-" run a linter on save
-autocmd! BufWritePost * Neomake
+" remove trailing whitespace on save
+autocmd BufWritePre {*.txt,*.md,*.erb,*.rb,*.js,*.coffee,*.scss,*.haml,*.py,*.js,*.clj,*.php} :call <SID>CleanFile()
+
 let g:neomake_warning_sign = {'text': 'ℹ︎', 'texthl': 'WarningMsg'}
 let g:neomake_error_sign = {'text': '✖︎', 'texthl': 'WarngingMsg'}
-
 let g:neomake_javascript_enabled_makers = ['flow', 'eslint']
 let g:neomake_jsx_enabled_makers = ['flow', 'eslint']
 let g:neomake_ruby_enabled_makers = ['mri']
-" disable flow's error reporting.
-let g:flow#enable = 0
+" run a linter on save
+autocmd! BufWritePost * Neomake
 
 " map leader n to toggle nerd tree
 map <leader>n :NERDTreeToggle<CR>

@@ -3,6 +3,7 @@
 _temp/*
 _backup/*
 bundle/*
+rplugin
 
 !_temp/.gitkeep
 !_backup/.gitkeep

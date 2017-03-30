@@ -1,22 +1,20 @@
 " Vundle Setup
-filetype off " required
-
-" set the runtime path to include Vundle and initialize
+filetype off
 set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'bling/vim-airline'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plugin 'dag/vim-fish'
-Plugin 'edkolev/tmuxline.vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'elzr/vim-json'
 Plugin 'fatih/vim-go'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'junegunn/fzf'
+"Plugin 'junegunn/fzf.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'lambdatoast/elm.vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'neomake/neomake'
@@ -32,9 +30,10 @@ Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-ruby/vim-ruby'
+call vundle#end()
 
-call vundle#end()            " required
-filetype plugin indent on    " requiredfiletype plugin indent on
+" ======= config begin ========
+filetype plugin indent on
 
 set wildmenu
 set autoread
@@ -52,14 +51,15 @@ let g:deoplete#auto_complete_delay = 100
 let g:airline_powerline_fonts=1
 let g:javascript_enable_domhtmlcss = 1
 
-" Speed up things with `ag` instead of grep
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0 " no need to cache ag
+  set grepprg=ag\ --vimgrep\ $*
+  set grepformat=%f:%l:%c:%m
 end
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_by_filename = 1
+
+let $FZF_DEFAULT_COMMAND='ag -l -g ""'
+let $FZF_DEFAULT_OPTS='--inline-info'
+map <C-P> :FZF<CR>
+
 
 " don't use fish for shell stuff
 if &shell =~# 'fish$'

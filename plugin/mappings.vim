@@ -45,9 +45,6 @@ map <leader>et :tabe %%
 " Swap two words
 nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
 
-" Underline the current line with '='
-nmap <silent> <leader>ul :t.\|s/./=/g\|:nohls<cr>
-
 " set text wrapping toggles
 nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
 
@@ -77,7 +74,7 @@ nnoremap <S-Right> :wincmd l<CR>
 nnoremap <S-Left> :wincmd h<CR>
 
 " search for words under the cursor
-nnoremap K :Ag "\b<C-R><C-W>\b"<CR>
+nnoremap <C-f> :Ag "\b<C-R><C-W>\b"<CR>
 
 vnoremap <C-c> "+y
 " ctrl-s should save

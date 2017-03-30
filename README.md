@@ -4,6 +4,7 @@ This vimrc is customized for Neovim
 
 ```bash
 mkdir -p ~/.config/nvim
+ln -s ~/.config/nvim/ ~/.vim
 git clone https://github.com/snatchev/.vim.git ~/.config/nvim/
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
 ```
